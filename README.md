@@ -31,21 +31,21 @@ code/
   stage2/       stage2_run.py               3 techniques x 2 regimes x 3 alphas
   analysis/     stage2_analyze_full.py      every table in the paper
                 key_tests_independent.py    the headline tests, computed independently
-                paired_routing.py           selective-routing policies
-                cascade_eval.py             cascade routing                      [porting]
-                log_confidence.py           answer-confidence logging            [porting]
-  probes/       probe_base.py               untrained student, for the partition [porting]
-                probe_forgetting_enem.py    catastrophic forgetting on ENEM      [porting]
+                paired_routing.py           routing ceilings (oracle, stratum)
+                log_confidence.py           per-question confidence, one forward pass
+                cascade_eval.py             a deployable confidence-gated cascade
+  probes/       probe_forgetting_enem.py    catastrophic forgetting on ENEM
 tests/          test_shuffle_notag.py       the derangement is a true derangement
                 test_alpha_cpu.py           masking and alpha weights, CPU-only
 data/           the 4,260 released questions and the teacher rationales
 results/        the aggregate tables behind the paper's figures
-figures/        make_figures.py             renders the paper's figures          [porting]
+figures/        make_figures.py             renders the paper's figures, plus the
+                                            rendered PDFs and PNGs themselves
 ```
 
-Entries marked `[porting]` are being translated from the original working scripts
-and land in a follow-up commit; the numbers they produced are already in
-`results/`.
+The untrained student that defines the partition is not a separate script: it is
+`stage1_placement.py` run with `--think-modes base`, which loads the model and
+evaluates it without training.
 
 Read it in pipeline order: `data_prep/` produces what `stage1/` consumes, `stage1/`
 answers the causal question that motivates `stage2/`, and `analysis/` turns
@@ -63,7 +63,8 @@ STAGE 0 · build the paired partition
    in    data/questions_2024_2025.jsonl        4,260 items, 2024/2025
          data/teacher_rationales.jsonl         Qwen3-32B, truncated to 250 words
                                                keeping the TAIL (where the decision is)
-   run   code/probes/probe_base.py             the UNTRAINED student answers everything
+   run   code/stage1/stage1_placement.py       the UNTRAINED student answers everything
+           --think-modes base                  (mode `base` = no training, inference only)
          code/data_prep/regenerate_splits.py   crosses the two verdicts
    out   A / B / C / D  +  ten 85/15 seeds     data/splits_stage2/*.pkl
 
@@ -325,3 +326,27 @@ accepted.
 ## License
 
 Code: MIT (see `LICENSE`). Data: see `data/README.md`.
+
+---
+
+## Routing: from a ceiling to something deployable
+
+Reasoning costs roughly 77× the latency of answering directly, and it does not
+help uniformly — it helps exactly where direct answering fails. So the question
+worth asking is not *whether* to reason but *where*, and the repository answers it
+in two steps that should not be confused:
+
+| script | policy | uses gold? | what it tells you |
+|---|---|---|---|
+| `paired_routing.py` | oracle, stratum | **yes** | the CEILING a perfect router could reach |
+| `log_confidence.py` + `cascade_eval.py` | confidence-gated cascade | no | what a REAL router recovers of that ceiling |
+
+The oracle reasons only where reasoning rescues a wrong direct answer, and the
+stratum rule reasons on B and D. Both consult the outcome or the gold-derived
+partition, so they bound the achievable benefit rather than describing a system
+you could ship. The cascade is the deployable counterpart: one extra forward pass
+per question yields the model's own confidence over A–E, and only the least
+confident fraction is escalated.
+
+Read them together. The oracle alone overstates what routing buys; the cascade
+alone gives no reference for how much was left on the table.
