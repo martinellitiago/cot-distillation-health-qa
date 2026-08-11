@@ -1,0 +1,10 @@
+claim,cond_1,cond_2,split,regime,subset,acc_1,acc_2,delta_2_minus_1,paired_t_p,wilcoxon_p,positive_seeds,ties
+"alpha repair, hard direct",distill_sft,distill_sft_a0.1,hard,answer_only,ALL,0.1549504950495049,0.1831683168316831,0.0282178217821782,0.0131249883105745,0.01171875,8,1
+"alpha 0.3 repair, hard direct",distill_sft,distill_sft_a0.3,hard,answer_only,ALL,0.1549504950495049,0.1806930693069307,0.0257425742574257,0.0324826173258264,0.04296875,7,0
+"closed gap vs SFT, hard direct",distill_sft_a0.1,pure_sft,hard,answer_only,ALL,0.1831683168316831,0.1910891089108911,0.0079207920792079,0.3800487120450542,0.5078125,6,0
+"closed gap vs step, hard direct",distill_sft_a0.1,step_by_step,hard,answer_only,ALL,0.1831683168316831,0.194059405940594,0.0108910891089108,0.1832873869944718,0.181640625,7,0
+"reasoning preserved, hard",distill_sft,distill_sft_a0.1,hard,reasoning,ALL,0.2371287128712871,0.2405940594059405,0.0034653465346534,0.7121755311890315,0.900390625,4,0
+"reasoning preserved, ABC",distill_sft,distill_sft_a0.1,abc,reasoning,ALL,0.6806794055201698,0.6768577494692144,-0.0038216560509554,0.6365554121148376,0.826171875,5,0
+step regularization vs SFT,pure_sft,step_by_step_a0.1,hard,answer_only,ALL,0.1910891089108911,0.2173267326732673,0.0262376237623762,0.0255392163788824,0.037109375,8,0
+step reasoning cost at alpha 0.3,step_by_step,step_by_step_a0.3,abc,reasoning,ALL,0.670276008492569,0.6524416135881104,-0.0178343949044585,0.0037463324390385,0.0078125,0,2
+distill vs step on B reasoning,step_by_step,distill_sft,abc,reasoning,B,0.4048951048951049,0.4265734265734265,0.0216783216783216,0.0254272492049748,0.03515625,7,0

@@ -1,0 +1,51 @@
+# --- experiment outputs (regenerate, never commit) -----------------------
+outputs_stage1/
+outputs_stage2/
+models_stage1/
+models_stage2/
+analysis_stage1/
+analysis_stage2/
+*/adapter/
+*/checkpoints/
+*/_trainer/
+
+# --- large intermediate artefacts ----------------------------------------
+*.pkl
+*.parquet
+!data/*.jsonl
+distill_thinks/
+data/splits_stage2/
+
+# --- internal source archives that are NOT redistributed ------------------
+# The full item bank spans 2011-2025; only the 2024/2025 study population is
+# released, and it is built by code/1_data_preparation/build_release_dataset.py.
+multiple_choice.json
+qwen32_qa_thinkings*.pkl
+dump*.txt
+jsons_part*.txt
+
+# --- python ---------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# --- latex ----------------------------------------------------------------
+*.aux
+*.log
+*.out
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
+*.spl
+*.synctex.gz
+
+# --- os / editor ----------------------------------------------------------
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

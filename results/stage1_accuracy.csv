@@ -1,0 +1,8 @@
+condition,n_seeds,n_q_per_seed,acc_published,acc_corrected,delta_pp,divergent_pct,no_answer_pct
+base@trainB_mnt2048_promptlegacy,10,164,0.439,0.439,0.0,0.12,6.77
+correct_notag@trainAB_mnt768_promptreasoning,10,164,0.3915,0.4024,1.098,3.41,0.24
+correct@trainAB_mnt768_promptreasoning,10,164,0.3902,0.3976,0.732,3.66,0.49
+base@trainAB_mnt768_promptreasoning,10,164,0.3524,0.353,0.061,0.18,25.18
+correct_after@trainAB_mnt768_promptanswer_only,10,164,0.3238,0.3213,-0.244,4.51,0.0
+shuffle_notag@trainAB_mnt768_promptreasoning,10,164,0.2848,0.2951,1.037,4.76,7.5
+shuffle@trainAB_mnt768_promptreasoning,10,164,0.2372,0.2433,0.61,5.61,19.39

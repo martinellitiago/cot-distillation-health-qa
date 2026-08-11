@@ -1,0 +1,42 @@
+==============================================================================
+FORGETTING — AXIS 1: KNOWLEDGE (ENEM, direct answer, <think> suppressed)
+Sample: data/enem_sonda.parquet (395 image-free items). Tolerant parser re-applied.
+==============================================================================
+  base           acc=0.742  emitted=395/395
+  pure_sft        acc=0.747  emitted=395/395
+  distill_sft    acc=0.739  emitted=395/395
+  step_by_step   acc=0.752  emitted=395/395
+  pure_sft        delta_vs_base=+0.005
+  distill_sft    delta_vs_base=-0.003
+  step_by_step   delta_vs_base=+0.010
+
+==============================================================================
+FORGETTING — AXIS 2: REASONING ABILITY (ENEM, free reasoning, cap 1536)
+Base evaluated once (deterministic). Adapters: 10 seeds; alphas for distill/step.
+==============================================================================
+  base           acc=0.848  emitted=381/395  chars_med=2660  EN=100%
+
+  condition              seeds     acc              CI95  chars
+  pure_sft  a1.0             10   0.747     [0.742,0.752]     11
+  distill_sft a1.0          10   0.818     [0.810,0.827]    628
+  distill_sft a0.1          10   0.813     [0.807,0.819]    614
+  distill_sft a0.3          10   0.813     [0.808,0.819]    610
+  step_by_step a1.0         10   0.816     [0.811,0.821]    504
+  step_by_step a0.1         10   0.814     [0.805,0.823]    494
+  step_by_step a0.3         10   0.815     [0.807,0.823]    493
+
+  PAIRED vs base (items both answered, alpha=1.0, mean over 10 seeds):
+    pure_sft        adapter=0.759  base=0.879  paired_delta=-0.120  [10 seeds]
+    distill_sft    adapter=0.838  base=0.880  paired_delta=-0.042  [10 seeds]
+    step_by_step   adapter=0.836  base=0.880  paired_delta=-0.044  [10 seeds]
+
+  McNemar vs vanilla SFT (per question, pooled over common seeds, alpha=1.0):
+    distill_sft    acc=0.818 vs sft=0.747  delta=+0.072  McNemar_p=2.42e-22  [10 seeds]
+    step_by_step   acc=0.816 vs sft=0.747  delta=+0.069  McNemar_p=6.31e-22  [10 seeds]
+
+==============================================================================
+PAPER SENTENCE (calibrated):
+All fine-tuning slightly degrades general reasoning; rationale training reduces
+the degradation ~3-fold (paired vs base) and preserves the reasoning behavior
+itself (in Portuguese, 4-5x more concise), which vanilla SFT loses entirely.
+==============================================================================

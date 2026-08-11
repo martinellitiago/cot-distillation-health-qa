@@ -1,0 +1,41 @@
+{
+  "title": "Reasoning distillation for health professions question answering: code, data and analysis",
+  "description": "<p>Code, released dataset and analysis for a study of what actually transfers in reasoning distillation.</p><p>A cross-question <strong>derangement</strong> control separates the causal contribution of a rationale's <em>content</em> from its length and format: each item receives a fluent, same-length, same-style rationale belonging to a different question, so only relevance is destroyed. A ten-seed paired design then separates real technique differences from lucky single runs.</p><p>A 32B teacher (Qwen3-32B) is distilled into a 4B student (Qwen3-4B, LoRA) on 4,260 Portuguese multiple-choice questions from Brazilian health professions examinations (2024-2025). The release contains the full study population, the teacher rationales, the training and inference code for both experimental stages, CPU-only self-tests for the masking and loss-weighting mechanisms, and the analysis scripts that rebuild every table in the paper from question-level predictions.</p><p>Examination content remains the property of the examining bodies (Enare, INEP, FUVEST) and is redistributed for non-commercial research and educational use; see data/README.md.</p>",
+  "upload_type": "software",
+  "license": "MIT",
+  "access_right": "open",
+  "creators": [
+    {
+      "name": "Martinelli, Tiago"
+    },
+    {
+      "name": "Papa, João Paulo",
+      "affiliation": "São Paulo State University (UNESP)"
+    },
+    {
+      "name": "Pereira, Adriano"
+    }
+  ],
+  "keywords": [
+    "reasoning distillation",
+    "chain-of-thought",
+    "knowledge distillation",
+    "small language models",
+    "health informatics",
+    "medical question answering",
+    "multilingual NLP",
+    "causal ablation",
+    "reproducibility",
+    "Qwen3"
+  ],
+  "language": "eng",
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/martinellitiago/cot-distillation-health-qa",
+      "relation": "isSupplementTo",
+      "resource_type": "software",
+      "scheme": "url"
+    }
+  ],
+  "notes": "The dataset covers the 2024 and 2025 examination years, which is the complete study population; earlier years exist in the authors' internal item bank but were not used in any reported experiment. Known deviations between this code and the published numbers (answer extraction, loss normalisation, timing warm-up) are documented in the repository README."
+}

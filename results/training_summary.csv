@@ -1,0 +1,8 @@
+cond,tech,alpha,n_seeds,train_loss_mean,train_loss_std,steps
+distill_sft,distill_sft,1.0,10,0.5654,0.0007,382.0
+distill_sft_a0.1,distill_sft,0.1,10,3.6172,0.0264,382.0
+distill_sft_a0.3,distill_sft,0.3,10,4.2247,0.0256,382.0
+pure_sft,pure_sft,1.0,10,0.266,0.0017,382.0
+step_by_step,step_by_step,1.0,10,0.5637,0.0014,678.0
+step_by_step_a0.1,step_by_step,0.1,10,3.4992,0.0192,678.0
+step_by_step_a0.3,step_by_step,0.3,10,3.7097,0.0235,678.0

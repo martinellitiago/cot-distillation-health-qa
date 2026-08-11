@@ -19,3 +19,15 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+---
+
+NOTE ON THE DATA
+
+This licence covers the CODE in this repository. The examination items in
+`data/questions_2024_2025.jsonl` are administered and published by the
+examining bodies named in `data/README.md`, which retain all rights in that
+content; the compilation is redistributed for non-commercial research and
+educational use with attribution. The teacher rationales in
+`data/teacher_rationales.jsonl` are our own model output and are released under
+the MIT terms above. See `data/README.md` for the full statement.

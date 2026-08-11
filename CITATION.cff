@@ -1,0 +1,55 @@
+cff-version: 1.2.0
+title: >-
+  Reasoning distillation for health professions question answering:
+  code, data and analysis
+message: >-
+  If you use this software or dataset, please cite both the software
+  (this record) and the accompanying paper.
+type: software
+authors:
+  - given-names: Tiago
+    family-names: Martinelli
+    email: tiago.martinelli93@gmail.com
+    # orcid: 'https://orcid.org/0000-0000-0000-0000'   # TODO
+  - given-names: João Paulo
+    family-names: Papa
+    # orcid: 'https://orcid.org/0000-0000-0000-0000'   # TODO
+    affiliation: São Paulo State University (UNESP)
+  - given-names: Adriano
+    family-names: Pereira
+    # orcid: 'https://orcid.org/0000-0000-0000-0000'   # TODO
+repository-code: 'https://github.com/martinellitiago/cot-distillation-health-qa'
+abstract: >-
+  Code, released dataset and analysis for a study of what actually transfers in
+  reasoning distillation. A cross-question derangement control separates the
+  causal contribution of a rationale's content from its length and format, and a
+  ten-seed paired design separates real technique differences from lucky runs.
+  A 32B teacher is distilled into a 4B student on 4,260 Portuguese multiple-choice
+  questions from Brazilian health professions examinations (2024-2025).
+keywords:
+  - reasoning distillation
+  - chain-of-thought
+  - knowledge distillation
+  - small language models
+  - health informatics
+  - medical question answering
+  - multilingual NLP
+  - causal ablation
+  - reproducibility
+license: MIT
+license-url: 'https://github.com/martinellitiago/cot-distillation-health-qa/blob/main/LICENSE'
+version: 1.0.0
+date-released: '2026-08-11'
+references:
+  - type: article
+    title: '[paper title]'                              # TODO
+    authors:
+      - given-names: Tiago
+        family-names: Martinelli
+      - given-names: João Paulo
+        family-names: Papa
+      - given-names: Adriano
+        family-names: Pereira
+    journal: Artificial Intelligence in Medicine
+    year: 2026
+    # doi: '10.0000/000000'                             # TODO
