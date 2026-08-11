@@ -101,13 +101,8 @@ not: deranging collapses transfer from 0.39 to 0.24, while moving a coherent
 rationale out of the `<think>` span changes nothing. Content does the work, so
 Stage 2's question is worth asking.
 
-**Why the partition comes before both.** Distillation can only be observed where
-the teacher knows something the student does not. That is subset B by
-construction, and it is why aggregate accuracy is the wrong thermometer: it mixes
-B with the A items the student already had right.
-
-**Stage 0 — the paired partition.** Every item is answered by the teacher and by
-the *untrained* student. The pair of outcomes defines four strata:
+**Why the partition comes first.** Every item is answered by the teacher and by
+the *untrained* student, and the pair of outcomes defines four strata:
 
 | stratum | teacher | untrained student | what it is |
 |---|---|---|---|
@@ -116,18 +111,11 @@ the *untrained* student. The pair of outcomes defines four strata:
 | **C** | wrong | right | teacher noise |
 | **D** | wrong | wrong | the hard stratum (stored under the legacy code `H`) |
 
-Subset **B** carries the paper's claims. It is where the teacher knows something
-the student does not, so it is the only stratum where transfer can be observed
-at all. Aggregate accuracy hides it, which is exactly why the aggregate is the
-wrong thermometer.
-
-**Stage 1 — what transfers.** Six target layouts crossed over content
-(coherent vs. deranged) and format (inside the native `<think>` span, as plain
-body text, or after the label). Trains on A∪B, evaluates on B.
-
-**Stage 2 — which technique.** Three techniques (`pure_sft`, `distill_sft`,
-`step_by_step`) × two inference regimes (direct answering, primed reasoning) ×
-three loss weights (α ∈ {1.0, 0.3, 0.1}), ten seeds each: 70 runs.
+Distillation can only be observed where the teacher knows something the student
+does not. That is subset **B**, by construction — which is also why aggregate
+accuracy is the wrong thermometer: it dilutes B with the A items the student
+already had right, and a technique can look flat in aggregate while moving B
+substantially.
 
 > **The two alphas are different quantities.** For `distill_sft`, α weights the
 > rationale **tokens** inside one target. For `step_by_step`, α weights the whole
