@@ -1,10 +1,11 @@
 cff-version: 1.2.0
 title: >-
-  Reasoning distillation for health professions question answering:
-  code, data and analysis
+  Reasoning distillation for multiple-choice question answering in Portuguese
+  health professions examinations: code, data and analysis
 message: >-
-  If you use this software or dataset, please cite both the software
-  (this record) and the accompanying paper.
+  If you use this software or dataset, please cite this record. The accompanying
+  manuscript is under review and not yet published; this file will be updated
+  with the article reference once it appears.
 type: software
 authors:
   - given-names: Tiago
@@ -40,16 +41,7 @@ license: MIT
 license-url: 'https://github.com/martinellitiago/cot-distillation-health-qa/blob/main/LICENSE'
 version: 1.0.0
 date-released: '2026-08-11'
-references:
-  - type: article
-    title: '[paper title]'                              # TODO
-    authors:
-      - given-names: Tiago
-        family-names: Martinelli
-      - given-names: João Paulo
-        family-names: Papa
-      - given-names: Adriano
-        family-names: Pereira
-    journal: Artificial Intelligence in Medicine
-    year: 2026
-    # doi: '10.0000/000000'                             # TODO
+# The accompanying manuscript is under review. When it is accepted, replace this
+# block with a `preferred-citation:` entry of type `article` carrying the final
+# title, journal, year and DOI, so that citation tools point at the paper rather
+# than at the software record.

@@ -1,4 +1,4 @@
-# Reasoning distillation for health professions question answering
+# Reasoning distillation for multiple-choice question answering in Portuguese health professions examinations
 
 Code, data, and analysis for **"[paper title]"** — a study of what actually
 transfers when a large teacher's rationales are distilled into a small student,
@@ -55,65 +55,55 @@ answers the causal question that motivates `stage2/`, and `analysis/` turns
 
 ## The experimental design in one page
 
-```mermaid
-flowchart TD
-    Q["<b>questions_2024_2025.jsonl</b><br/>4,260 items · 2024/2025"]
+The pipeline, as paths. Each block lists what it reads, what runs, and what it
+leaves behind.
 
-    subgraph S0["Stage 0 — the paired partition"]
-        direction LR
-        TEA["Teacher Qwen3-32B<br/><i>generates rationales</i>"]
-        STU["Untrained student Qwen3-4B<br/><code>probe_base.py</code>"]
-        PART["<b>A / B / C / D</b><br/><code>regenerate_splits.py</code>"]
-        TEA --> PART
-        STU --> PART
-    end
+```
+STAGE 0 · build the paired partition
+   in    data/questions_2024_2025.jsonl        4,260 items, 2024/2025
+         data/teacher_rationales.jsonl         Qwen3-32B, truncated to 250 words
+                                               keeping the TAIL (where the decision is)
+   run   code/probes/probe_base.py             the UNTRAINED student answers everything
+         code/data_prep/regenerate_splits.py   crosses the two verdicts
+   out   A / B / C / D  +  ten 85/15 seeds     data/splits_stage2/*.pkl
 
-    RAT["<b>teacher_rationales.jsonl</b><br/>truncated to 250 words, tail-preserving"]
+STAGE 1 · does content or format drive transfer?
+   in    the partition, restricted to A ∪ B
+   run   code/stage1/stage1_placement.py       6 target layouts × 10 seeds
+                                                 coherent | deranged
+                                                 × tagged | tag-free | post-label
+   out   outputs_stage1/<run>/infer_results.csv
+         results/stage1_accuracy.csv           evaluated on B only
 
-    subgraph S1["Stage 1 — what transfers: content or format?"]
-        direction TB
-        M["6 target layouts<br/>coherent vs <b>deranged</b> × tagged / tag-free / post-label<br/><code>stage1_placement.py</code>"]
-        E1["train on A∪B → evaluate on <b>B</b><br/>10 seeds"]
-        M --> E1
-    end
+STAGE 2 · which distillation technique?
+   in    the partition, 85% of A ∪ B ∪ C for training
+   run   code/stage2/stage2_run.py             3 techniques × 2 regimes × 3 α
+                                               = 70 runs
+   out   outputs_stage2/<run>/infer_{abc,hard}_{answer_only,reasoning}.csv
+                                               evaluated on the held-out 15% + hard
 
-    subgraph S2["Stage 2 — which technique?"]
-        direction TB
-        T2["3 techniques × 2 regimes × 3 α<br/>= 70 runs<br/><code>stage2_run.py</code>"]
-        E2["train on ABC 85% → evaluate on ABC 15% + hard<br/>10 seeds"]
-        T2 --> E2
-    end
-
-    subgraph AN["Analysis"]
-        direction TB
-        A1["<code>stage2_analyze_full.py</code><br/>accuracy · paired tests · trade-off<br/>cost · confounders"]
-        A2["<code>key_tests_independent.py</code><br/>headline tests, independent path"]
-    end
-
-    OUT["<b>results/</b> — every table in the paper"]
-
-    Q --> S0
-    Q --> RAT
-    TEA -.-> RAT
-    S0 --> RAT
-    RAT --> S1
-    S0 --> S1
-    RAT --> S2
-    S0 --> S2
-    S1 --> FIND1["<b>content is causal</b><br/>deranging collapses transfer<br/>the &lt;think&gt; format is neutral"]
-    S2 --> AN
-    AN --> OUT
-    FIND1 --> S2
-
-    classDef data fill:#E8F4F2,stroke:#0F766E,stroke-width:2px,color:#111
-    classDef finding fill:#FFF4E6,stroke:#B5651D,stroke-width:2px,color:#111
-    class Q,RAT,OUT data
-    class FIND1 finding
+ANALYSIS · from predictions to the paper's tables
+   in    outputs_stage2/
+   run   code/analysis/stage2_analyze_full.py    accuracy, paired tests, trade-off,
+                                                 cost, confounder panel
+         code/analysis/key_tests_independent.py  the headline tests, on a separate
+                                                 code path so a bug cannot propagate
+         code/analysis/paired_routing.py         selective-routing policies
+   out   results/*.csv                           every table in the paper
 ```
 
-Stage 1 exists to earn the right to run Stage 2: if a deranged rationale
-transferred as well as a coherent one, no comparison of distillation *techniques*
-would mean anything.
+**Why Stage 1 comes first.** It exists to earn the right to run Stage 2. If a
+deranged rationale — fluent, same length, same style, but about a *different*
+question — transferred as well as a coherent one, then comparing distillation
+*techniques* would be comparing ways of formatting noise. Stage 1 shows it does
+not: deranging collapses transfer from 0.39 to 0.24, while moving a coherent
+rationale out of the `<think>` span changes nothing. Content does the work, so
+Stage 2's question is worth asking.
+
+**Why the partition comes before both.** Distillation can only be observed where
+the teacher knows something the student does not. That is subset B by
+construction, and it is why aggregate accuracy is the wrong thermometer: it mixes
+B with the A items the student already had right.
 
 **Stage 0 — the paired partition.** Every item is answered by the teacher and by
 the *untrained* student. The pair of outcomes defines four strata:
@@ -314,17 +304,23 @@ and `DERANGEMENT BROKEN` (no item may receive its own rationale).
 
 ## Citation
 
+The accompanying manuscript is **under review and not yet published**. Until it
+appears, please cite this archived release:
+
 ```bibtex
-@article{martinelli2026reasoning,
-  title   = {[paper title]},
+@software{martinelli2026cotdistillation,
+  title   = {Reasoning distillation for multiple-choice question answering in
+             Portuguese health professions examinations: code, data and analysis},
   author  = {Martinelli, Tiago and Papa, Jo\~ao Paulo and Pereira, Adriano},
-  journal = {Artificial Intelligence in Medicine},
   year    = {2026},
-  doi     = {[DOI]}
+  url     = {https://github.com/martinellitiago/cot-distillation-health-qa},
+  doi     = {[Zenodo DOI]},
+  version = {1.0.0}
 }
 ```
 
-Archived release: [Zenodo DOI]
+This block will be replaced with the article citation once the manuscript is
+accepted.
 
 ## License
 
