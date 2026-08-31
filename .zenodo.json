@@ -1,21 +1,28 @@
 {
-  "title": "Reasoning distillation for multiple-choice question answering in Portuguese health professions examinations: code, data and analysis",
-  "description": "<p>Code, released dataset and analysis for a study of what actually transfers in reasoning distillation.</p><p>A cross-question <strong>derangement</strong> control separates the causal contribution of a rationale's <em>content</em> from its length and format: each item receives a fluent, same-length, same-style rationale belonging to a different question, so only relevance is destroyed. A ten-seed paired design then separates real technique differences from lucky single runs.</p><p>A 32B teacher (Qwen3-32B) is distilled into a 4B student (Qwen3-4B, LoRA) on 4,260 Portuguese multiple-choice questions from Brazilian health professions examinations (2024-2025). The release contains the full study population, the teacher rationales, the training and inference code for both experimental stages, CPU-only self-tests for the masking and loss-weighting mechanisms, and the analysis scripts that rebuild every table in the paper from question-level predictions.</p><p>Examination content remains the property of the examining bodies (Enare, INEP, FUVEST) and is redistributed for non-commercial research and educational use; see data/README.md.</p>",
-  "upload_type": "software",
-  "license": "MIT",
-  "access_right": "open",
   "creators": [
     {
-      "name": "Martinelli, Tiago"
+      "name": "Martinelli, Tiago",
+      "orcid": "0000-0003-1244-3952",
+      "affiliation": "Einstein Global Advanced Technologies for Equity (E-GATE), Hospital Israelita Albert Einstein; Institute of Science and Technology Itau (ICTi)"
     },
     {
-      "name": "Papa, João Paulo",
-      "affiliation": "São Paulo State University (UNESP)"
+      "name": "Pereira, Adriano Jose",
+      "orcid": "0000-0002-3528-3800",
+      "affiliation": "Einstein Global Advanced Technologies for Equity (E-GATE), Hospital Israelita Albert Einstein"
     },
     {
-      "name": "Pereira, Adriano"
+      "name": "Papa, Joao Paulo",
+      "orcid": "0000-0002-6494-7514",
+      "affiliation": "Einstein Global Advanced Technologies for Equity (E-GATE), Hospital Israelita Albert Einstein; School of Sciences, Sao Paulo State University (UNESP)"
     }
   ],
+  "title": "Audit Before You Distill: code, data, and analysis for controlled reasoning transfer into compact health-professions language models",
+  "description": "Code, released research materials, and analysis for a controlled study of reasoning distillation from a Qwen3-32B teacher into a Qwen3-4B student using Portuguese multiple-choice questions from Brazilian multiprofessional health residency examinations. Cross-question derangement separates question-relevant rationale content from length and format, while a paired ten-split design evaluates answer-only supervised fine-tuning, single-target distill-SFT, and multi-task step-by-step distillation.",
+  "version": "1.0.0",
+  "access_right": "open",
+  "license": "other-nc",
+  "upload_type": "software",
+  "language": "eng",
   "keywords": [
     "reasoning distillation",
     "chain-of-thought",
@@ -23,12 +30,11 @@
     "small language models",
     "health informatics",
     "medical question answering",
-    "multilingual NLP",
-    "causal ablation",
+    "multilingual natural language processing",
+    "controlled ablation",
     "reproducibility",
     "Qwen3"
   ],
-  "language": "eng",
   "related_identifiers": [
     {
       "identifier": "https://github.com/martinellitiago/cot-distillation-health-qa",
@@ -37,5 +43,5 @@
       "scheme": "url"
     }
   ],
-  "notes": "The dataset covers the 2024 and 2025 examination years, which is the complete study population; earlier years exist in the authors' internal item bank but were not used in any reported experiment. Known deviations between this code and the published numbers (answer extraction, loss normalisation, timing warm-up) are documented in the repository README."
+  "notes": "The dataset covers the 2024 and 2025 examination years, which is the complete study population; earlier years exist in the authors' internal item bank but were not used in any reported experiment. Known deviations between this code and the published numbers (answer extraction, loss normalisation, timing warm-up) are documented in the repository README. Licensing is file-specific: code and teacher-generated rationales use MIT, while examination items remain the property of the examining bodies named in data/README.md and are redistributed only for non-commercial research and educational use with attribution. The record-level Other (Non-Commercial) designation is conservative and does not relicense third-party examination content."
 }
