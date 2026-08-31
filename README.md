@@ -1,6 +1,7 @@
-# Reasoning distillation for multiple-choice question answering in Portuguese health professions examinations
+# Audit Before You Distill
 
-Code, data, and analysis for **"[paper title]"** — a study of what actually
+Code, data, and analysis for **"Audit Before You Distill: A Controlled Workflow
+for Reasoning Transfer into Compact Health-Professions Language Models"** — a study of what actually
 transfers when a large teacher's rationales are distilled into a small student,
 using Portuguese multiple-choice questions from Brazilian multiprofessional
 health residency examinations.
@@ -298,9 +299,9 @@ appears, please cite this archived release:
 
 ```bibtex
 @software{martinelli2026cotdistillation,
-  title   = {Reasoning distillation for multiple-choice question answering in
-             Portuguese health professions examinations: code, data and analysis},
-  author  = {Martinelli, Tiago and Papa, Jo\~ao Paulo and Pereira, Adriano},
+  title   = {Audit Before You Distill: code, data, and analysis for controlled
+             reasoning transfer into compact health-professions language models},
+  author  = {Martinelli, Tiago and Pereira, Adriano Jos\'e and Papa, Jo\~ao Paulo},
   year    = {2026},
   url     = {https://github.com/martinellitiago/cot-distillation-health-qa},
   doi     = {[Zenodo DOI]},

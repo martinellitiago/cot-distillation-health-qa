@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 title: >-
-  Reasoning distillation for multiple-choice question answering in Portuguese
-  health professions examinations: code, data and analysis
+  Audit Before You Distill: code, data, and analysis for controlled reasoning
+  transfer into compact health-professions language models
 message: >-
   If you use this software or dataset, please cite this record. The accompanying
   manuscript is under review and not yet published; this file will be updated
@@ -10,20 +10,22 @@ type: software
 authors:
   - given-names: Tiago
     family-names: Martinelli
-    email: tiago.martinelli93@gmail.com
-    # orcid: 'https://orcid.org/0000-0000-0000-0000'   # TODO
+    email: tiago.martinelli@icti.itau.com.br
+    orcid: 'https://orcid.org/0000-0003-1244-3952'
+    affiliation: Einstein Global Advanced Technologies for Equity (E-GATE), Hospital Israelita Albert Einstein; Institute of Science and Technology Itaú (ICTi)
+  - given-names: Adriano José
+    family-names: Pereira
+    orcid: 'https://orcid.org/0000-0002-3528-3800'
+    affiliation: Einstein Global Advanced Technologies for Equity (E-GATE), Hospital Israelita Albert Einstein
   - given-names: João Paulo
     family-names: Papa
-    # orcid: 'https://orcid.org/0000-0000-0000-0000'   # TODO
-    affiliation: São Paulo State University (UNESP)
-  - given-names: Adriano
-    family-names: Pereira
-    # orcid: 'https://orcid.org/0000-0000-0000-0000'   # TODO
+    orcid: 'https://orcid.org/0000-0002-6494-7514'
+    affiliation: Einstein Global Advanced Technologies for Equity (E-GATE), Hospital Israelita Albert Einstein; School of Sciences, São Paulo State University (UNESP)
 repository-code: 'https://github.com/martinellitiago/cot-distillation-health-qa'
 abstract: >-
   Code, released dataset and analysis for a study of what actually transfers in
   reasoning distillation. A cross-question derangement control separates the
-  causal contribution of a rationale's content from its length and format, and a
+  question-specific contribution of a rationale's content from its length and format, and a
   ten-seed paired design separates real technique differences from lucky runs.
   A 32B teacher is distilled into a 4B student on 4,260 Portuguese multiple-choice
   questions from Brazilian health professions examinations (2024-2025).
@@ -35,12 +37,11 @@ keywords:
   - health informatics
   - medical question answering
   - multilingual NLP
-  - causal ablation
+  - controlled ablation
   - reproducibility
 license: MIT
 license-url: 'https://github.com/martinellitiago/cot-distillation-health-qa/blob/main/LICENSE'
 version: 1.0.0
-date-released: '2026-08-11'
 # The accompanying manuscript is under review. When it is accepted, replace this
 # block with a `preferred-citation:` entry of type `article` carrying the final
 # title, journal, year and DOI, so that citation tools point at the paper rather
