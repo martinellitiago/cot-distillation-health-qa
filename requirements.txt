@@ -7,22 +7,23 @@ matplotlib>=3.7
 pytest>=7.4
 pyarrow>=14.0          # parquet split files
 
-# Training and inference (GPU). The published runs used a single NVIDIA H100
-# with the Unsloth/Transformers stack.
-#
-# TODO before the archived release: pin the EXACT versions from the run
-# environment. Unsloth and TRL both moved fast during this project -- the code
-# already carries a compatibility shim for the TRL rename of SFTConfig's
-# max_seq_length -> max_length, and the loss-normalisation note in the README
-# depends on the transformers version (the num_items_in_batch behaviour arrived
-# in 4.46). Unpinned, these lines are a hint, not a reproduction.
-#
-# torch==
-# transformers==
-# trl==
-# unsloth==
-# datasets==
-# peft==
-# accelerate==
-# bitsandbytes==
+# Canonical reconstructed GPU environment for rerunning the final analyses.
+# The original environment was removed after the experiments; versions below
+# are restricted to those preserved verbatim in run logs. See
+# environment_h100_reconstructed.txt for provenance and the two Unsloth
+# versions used across the reported runs.
+--extra-index-url https://download.pytorch.org/whl/cu128
+torch==2.10.0+cu128
+transformers==5.5.0
+unsloth==2026.7.2
+xformers==0.0.35
+triton==3.6.0
+
+# These dependencies were present, but their exact original versions were not
+# recoverable. They remain deliberately unpinned rather than being guessed.
+trl
+datasets
+peft
+accelerate
+bitsandbytes
 tqdm>=4.66

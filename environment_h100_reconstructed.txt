@@ -1,0 +1,55 @@
+H100 RUN ENVIRONMENT — RECONSTRUCTED FROM EXPERIMENT LOGS
+========================================================
+
+Status
+------
+The original conda environment was removed after the experiments. This record
+contains only versions preserved verbatim in run logs or paths. It is not
+presented as an original `pip freeze` or `conda export`.
+
+Hardware and core runtime recorded in logs
+------------------------------------------
+Platform: Linux
+GPU: 1 x NVIDIA H100 80GB HBM3
+Visible GPU memory: 79.179 GB
+Precision: bfloat16 enabled
+FlashAttention 2: disabled
+Python: 3.11 (recovered from original traceback paths)
+PyTorch: 2.10.0+cu128
+PyTorch CUDA / toolkit family: 12.8
+Transformers: 5.5.0
+Triton: 3.6.0
+xFormers: 0.0.35
+
+Unsloth versions by reported analysis family
+--------------------------------------------
+2026.7.2:
+- final Stage 1 placement and tag-format runs (`etapa1_*.log`)
+- final Stage 2 alpha runs (`etapa2_a01/a03/a10*.log`)
+- no-think rationale-prefix diagnostic (`nothink_full.log`)
+- probability/PMI sensitivity runs (`pmi_exact*.log`)
+- generated-rationale utility audit
+- confidence and reasoning-sweep probes
+
+2026.6.8:
+- earlier/supporting Stage 1 and Stage 2 runs
+- forgetting analysis (`forgetting.log`)
+- supporting scaffold/model-generation runs under `logs/`
+
+Driver provenance
+-----------------
+The host reported NVIDIA driver 580.173.02 when the environment was audited
+after deletion. The original run logs did not preserve the driver version, so
+580.173.02 must not be interpreted as independently verified for every run.
+
+Interpretation note
+-------------------
+The Unsloth banner field `CUDA: 9.0` denotes the H100 compute capability, not
+the CUDA software version. The software runtime is identified by
+PyTorch 2.10.0+cu128 and the banner's CUDA Toolkit 12.8 field.
+
+Versions not recoverable from surviving evidence
+-------------------------------------------------
+TRL, datasets, PEFT, accelerate, bitsandbytes, NumPy, pandas, SciPy,
+scikit-learn, matplotlib, pyarrow, and tqdm. These must not be assigned exact
+historical versions without additional run evidence.
