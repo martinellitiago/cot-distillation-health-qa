@@ -1,0 +1,5 @@
+split,technique,mean_accuracy,min_seed_accuracy,max_seed_accuracy,n_seeds
+B,distill_sft,0.427,0.378,0.497,10
+D,distill_sft,0.237,0.213,0.272,10
+B,step_by_step,0.405,0.350,0.462,10
+D,step_by_step,0.231,0.198,0.262,10
