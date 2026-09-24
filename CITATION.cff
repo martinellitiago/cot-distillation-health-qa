@@ -21,7 +21,7 @@ authors:
     family-names: Pereira
     orcid: 'https://orcid.org/0000-0002-3528-3800'
     affiliation: Einstein Global Advanced Technologies for Equity (E-GATE), Hospital Israelita Albert Einstein
-repository-code: 'https://github.com/martinellitiago/cot-distillation-health-qa'
+repository-code: 'https://github.com/martinellitiago/cot-distillation-medical-qa'
 abstract: >-
   Code, released dataset and analysis for a study of what actually transfers in
   reasoning distillation. A cross-question derangement control separates the
@@ -40,7 +40,7 @@ keywords:
   - controlled ablation
   - reproducibility
 license: MIT
-license-url: 'https://github.com/martinellitiago/cot-distillation-health-qa/blob/main/LICENSE'
+license-url: 'https://github.com/martinellitiago/cot-distillation-medical-qa/blob/main/LICENSE'
 version: 1.0.0
 # The accompanying manuscript is under review. When it is accepted, replace this
 # block with a `preferred-citation:` entry of type `article` carrying the final

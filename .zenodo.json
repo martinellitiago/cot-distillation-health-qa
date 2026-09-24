@@ -37,7 +37,7 @@
   ],
   "related_identifiers": [
     {
-      "identifier": "https://github.com/martinellitiago/cot-distillation-health-qa",
+      "identifier": "https://github.com/martinellitiago/cot-distillation-medical-qa",
       "relation": "isSupplementTo",
       "resource_type": "software",
       "scheme": "url"

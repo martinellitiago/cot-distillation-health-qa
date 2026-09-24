@@ -339,7 +339,7 @@ appears, please cite this archived release:
              reasoning transfer into compact medical language models},
   author  = {Martinelli, Tiago and Papa, Jo\~ao Paulo and Pereira, Adriano Jos\'e},
   year    = {2026},
-  url     = {https://github.com/martinellitiago/cot-distillation-health-qa},
+  url     = {https://github.com/martinellitiago/cot-distillation-medical-qa},
   version = {1.0.0}
 }
 ```
