@@ -100,17 +100,6 @@ this dependence explicitly and is the unit used by the cluster bootstrap in the
 rationale-prefix diagnostic. `mapping_audit.json`, written with the dataset,
 verifies row counts, unique item ids, cluster counts, and the one-to-one join.
 
-## What is not here
-
-- **The exact archived A/B/C/D split files and question-level Stage 2
-  predictions.** They could not be exported from the original compute
-  environment. The canonical seeds, documented 85/15 design, and training code
-  allow comparable seeded partitions to be constructed, but the original
-  partitions cannot be recovered byte-for-byte from this release.
-- **Images** (see above).
-- **Trained LoRA adapters.** Available on request; they are large and cheap to
-  reproduce from this data.
-
 ## Licence and permitted use
 
 These examinations are administered by public and institutional examining bodies

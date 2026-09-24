@@ -1,7 +1,7 @@
 # Audit Before You Distill
 
 Code, data, and analysis for **"Audit Before You Distill: A Controlled Workflow
-for Reasoning Transfer into Compact Health-Professions Language Models"** — a study of what actually
+for Reasoning Transfer into Compact Medical Language Models"** — a study of what actually
 transfers when a large teacher's rationales are distilled into a small student,
 using Portuguese multiple-choice questions from Brazilian multiprofessional
 health residency examinations.
@@ -133,12 +133,10 @@ substantially.
 
 ## Reproducing the paper
 
-The original per-split files and question-level Stage-2 predictions could not be
-exported from the compute environment. The canonical seeds, documented 85/15
-design, and executed training code are preserved below, so a rerun can create
-comparable seeded partitions, but it will not recover the exact archived
-partitions byte-for-byte. The aggregate tables in `results/` are the audit trail
-for the numerical values reported in the paper.
+The canonical seeds, documented 85/15 design, and executed training code allow
+users to construct comparable seeded partitions and rerun the study pipeline.
+The aggregate tables in `results/` provide the audit trail for the numerical
+values reported in the paper.
 
 ```bash
 pip install -r requirements.txt
@@ -339,10 +337,9 @@ appears, please cite this archived release:
 @software{martinelli2026cotdistillation,
   title   = {Audit Before You Distill: code, data, and analysis for controlled
              reasoning transfer into compact health-professions language models},
-  author  = {Martinelli, Tiago and Pereira, Adriano Jos\'e and Papa, Jo\~ao Paulo},
+  author  = {Martinelli, Tiago and Papa, Jo\~ao Paulo and Pereira, Adriano Jos\'e},
   year    = {2026},
   url     = {https://github.com/martinellitiago/cot-distillation-health-qa},
-  doi     = {[Zenodo DOI]},
   version = {1.0.0}
 }
 ```

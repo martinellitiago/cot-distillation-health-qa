@@ -3,17 +3,17 @@
     {
       "name": "Martinelli, Tiago",
       "orcid": "0000-0003-1244-3952",
-      "affiliation": "Einstein Global Advanced Technologies for Equity (E-GATE), Hospital Israelita Albert Einstein"
-    },
-    {
-      "name": "Pereira, Adriano Jose",
-      "orcid": "0000-0002-3528-3800",
-      "affiliation": "Einstein Global Advanced Technologies for Equity (E-GATE), Hospital Israelita Albert Einstein"
+      "affiliation": "Einstein Global Advanced Technologies for Equity (E-GATE), Hospital Israelita Albert Einstein; Institute of Science and Technology Itau (ICTi), Itau Unibanco"
     },
     {
       "name": "Papa, Joao Paulo",
       "orcid": "0000-0002-6494-7514",
       "affiliation": "Einstein Global Advanced Technologies for Equity (E-GATE), Hospital Israelita Albert Einstein; School of Sciences, Sao Paulo State University (UNESP)"
+    },
+    {
+      "name": "Pereira, Adriano Jose",
+      "orcid": "0000-0002-3528-3800",
+      "affiliation": "Einstein Global Advanced Technologies for Equity (E-GATE), Hospital Israelita Albert Einstein"
     }
   ],
   "title": "Audit Before You Distill: code, data, and analysis for controlled reasoning transfer into compact health-professions language models",
@@ -43,5 +43,5 @@
       "scheme": "url"
     }
   ],
-  "notes": "The dataset covers the 2024 and 2025 examination years, which is the complete study population; earlier years exist in the authors' internal item bank but were not used in any reported experiment. All 4,260 evaluations are retained and grouped into 3,792 normalised-stem clusters where clustered resampling is required. Exact archived split files and question-level Stage 2 predictions could not be exported; canonical seeds, the documented 85/15 design, code, and aggregate result tables support comparable reruns and numerical auditing but not byte-for-byte recovery of the archived partitions. Known implementation deviations are documented in the repository README. Licensing is file-specific: code and teacher-generated rationales use MIT, while examination items remain the property of the examining bodies named in data/README.md and are redistributed only for non-commercial research and educational use with attribution. The record-level Other (Non-Commercial) designation is conservative and does not relicense third-party examination content."
+  "notes": "The dataset covers the 2024 and 2025 examination years, which is the complete study population; earlier years exist in the authors' internal item bank but were not used in any reported experiment. All 4,260 evaluations are retained and grouped into 3,792 normalised-stem clusters where clustered resampling is required. Canonical seeds, the documented 85/15 design, code, and aggregate result tables support comparable reruns and numerical auditing. Known implementation deviations are documented in the repository README. Licensing is file-specific: code and teacher-generated rationales use MIT, while examination items remain the property of the examining bodies named in data/README.md and are redistributed only for non-commercial research and educational use with attribution. The record-level Other (Non-Commercial) designation is conservative and does not relicense third-party examination content."
 }
