@@ -336,7 +336,7 @@ appears, please cite this archived release:
 ```bibtex
 @software{martinelli2026cotdistillation,
   title   = {Audit Before You Distill: code, data, and analysis for controlled
-             reasoning transfer into compact health-professions language models},
+             reasoning transfer into compact medical language models},
   author  = {Martinelli, Tiago and Papa, Jo\~ao Paulo and Pereira, Adriano Jos\'e},
   year    = {2026},
   url     = {https://github.com/martinellitiago/cot-distillation-health-qa},

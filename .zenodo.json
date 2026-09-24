@@ -16,7 +16,7 @@
       "affiliation": "Einstein Global Advanced Technologies for Equity (E-GATE), Hospital Israelita Albert Einstein"
     }
   ],
-  "title": "Audit Before You Distill: code, data, and analysis for controlled reasoning transfer into compact health-professions language models",
+  "title": "Audit Before You Distill: code, data, and analysis for controlled reasoning transfer into compact medical language models",
   "description": "Code, released research materials, and analysis for a controlled study of reasoning distillation from a Qwen3-32B teacher into a Qwen3-4B student using Portuguese four- and five-option questions from Brazilian multiprofessional health residency examinations. Cross-question derangement separates question-relevant rationale content from length and format, while a paired ten-split design evaluates answer-only supervised fine-tuning, single-target distill-SFT, and multi-task step-by-step distillation.",
   "version": "1.0.0",
   "access_right": "open",
