@@ -1,0 +1,9 @@
+{
+  "n_questions": 4260,
+  "n_teacher_rationales": 4260,
+  "n_unique_item_ids_questions": 4260,
+  "n_unique_item_ids_rationales": 4260,
+  "n_unique_question_clusters": 3792,
+  "n_repeated_stem_evaluations": 468,
+  "item_join_is_bijective": true
+}

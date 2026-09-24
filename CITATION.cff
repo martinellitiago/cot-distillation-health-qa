@@ -10,17 +10,17 @@ type: software
 authors:
   - given-names: Tiago
     family-names: Martinelli
-    email: tiago.martinelli@icti.itau.com.br
+    email: tiago.martinelli93@gmail.com
     orcid: 'https://orcid.org/0000-0003-1244-3952'
-    affiliation: Einstein Global Advanced Technologies for Equity (E-GATE), Hospital Israelita Albert Einstein; Institute of Science and Technology Itaú (ICTi)
-  - given-names: Adriano José
-    family-names: Pereira
-    orcid: 'https://orcid.org/0000-0002-3528-3800'
-    affiliation: Einstein Global Advanced Technologies for Equity (E-GATE), Hospital Israelita Albert Einstein
+    affiliation: Einstein Global Advanced Technologies for Equity (E-GATE), Hospital Israelita Albert Einstein; Institute of Science and Technology Itaú (ICTi), Itaú Unibanco
   - given-names: João Paulo
     family-names: Papa
     orcid: 'https://orcid.org/0000-0002-6494-7514'
     affiliation: Einstein Global Advanced Technologies for Equity (E-GATE), Hospital Israelita Albert Einstein; School of Sciences, São Paulo State University (UNESP)
+  - given-names: Adriano José
+    family-names: Pereira
+    orcid: 'https://orcid.org/0000-0002-3528-3800'
+    affiliation: Einstein Global Advanced Technologies for Equity (E-GATE), Hospital Israelita Albert Einstein
 repository-code: 'https://github.com/martinellitiago/cot-distillation-health-qa'
 abstract: >-
   Code, released dataset and analysis for a study of what actually transfers in

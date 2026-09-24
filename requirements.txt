@@ -1,5 +1,6 @@
-# Analysis and tests only -- these run on CPU and are enough to rebuild every
-# table and figure in the paper from the released predictions.
+# Analysis and tests. The released aggregate tables are sufficient to redraw
+# the published figures, and the canonical seeds and code construct comparable
+# seeded partitions (see README.md).
 numpy>=1.24
 pandas>=2.0
 scipy>=1.10

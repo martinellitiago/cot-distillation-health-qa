@@ -1,7 +1,7 @@
 # Audit Before You Distill
 
 Code, data, and analysis for **"Audit Before You Distill: A Controlled Workflow
-for Reasoning Transfer into Compact Health-Professions Language Models"** — a study of what actually
+for Reasoning Transfer into Compact Medical Language Models"** — a study of what actually
 transfers when a large teacher's rationales are distilled into a small student,
 using Portuguese multiple-choice questions from Brazilian multiprofessional
 health residency examinations.
@@ -32,15 +32,22 @@ code/
   stage2/       stage2_run.py               3 techniques x 2 regimes x 3 alphas
   analysis/     stage2_analyze_full.py      every table in the paper
                 key_tests_independent.py    the headline tests, computed independently
+                rationale_probability_tracing.py
+                                            prefix-wise restricted-choice probabilities
+                label_leakage_audit.py      lexical-overlap sensitivity
+                generated_rationale_utility.py
+                                            frozen-reader rationale audit
                 paired_routing.py           routing ceilings (oracle, stratum)
                 log_confidence.py           per-question confidence, one forward pass
                 cascade_eval.py             a deployable confidence-gated cascade
   probes/       probe_forgetting_enem.py    catastrophic forgetting on ENEM
 tests/          test_shuffle_notag.py       the derangement is a true derangement
                 test_alpha_cpu.py           masking and alpha weights, CPU-only
+                test_release_data.py        one-to-one data join and cluster counts
 data/           the 4,260 released questions and the teacher rationales
 results/        the aggregate tables behind the paper's figures
-figures/        make_figures.py             renders the paper's figures, plus the
+figures/        make_figures.py             renders the training-result figures
+                make_probability_figures.py renders the probability panels, plus the
                                             rendered PDFs and PNGs themselves
 ```
 
@@ -49,7 +56,7 @@ The untrained student that defines the partition is not a separate script: it is
 evaluates it without training.
 
 Read it in pipeline order: `data_prep/` produces what `stage1/` consumes, `stage1/`
-answers the causal question that motivates `stage2/`, and `analysis/` turns
+tests whether question-relevant content drives transfer, and `analysis/` turns
 `stage2/`'s predictions into the paper's tables. Run `tests/` before any GPU job.
 
 ---
@@ -62,7 +69,7 @@ leaves behind.
 ```
 STAGE 0 · build the paired partition
    in    data/questions_2024_2025.jsonl        4,260 items, 2024/2025
-         data/teacher_rationales.jsonl         Qwen3-32B, truncated to 250 words
+         data/teacher_rationales.jsonl         raw Qwen3-32B outputs; training keeps the final 250 words
                                                keeping the TAIL (where the decision is)
    run   code/stage1/stage1_placement.py       the UNTRAINED student answers everything
            --think-modes base                  (mode `base` = no training, inference only)
@@ -126,6 +133,11 @@ substantially.
 
 ## Reproducing the paper
 
+The canonical seeds, documented 85/15 design, and executed training code allow
+users to construct comparable seeded partitions and rerun the study pipeline.
+The aggregate tables in `results/` provide the audit trail for the numerical
+values reported in the paper.
+
 ```bash
 pip install -r requirements.txt
 
@@ -159,13 +171,16 @@ python code/analysis/key_tests_independent.py --root outputs_stage2
 
 | claim in the paper | produced by | table |
 |---|---|---|
-| content is causal (0.39 → 0.24 tagged, 0.39 → 0.29 tag-free) | Stage 1, `shuffle` vs `correct` | `results/stage1_accuracy.csv` |
+| relevant content drives transfer (0.39 → 0.24 tagged, 0.39 → 0.29 tag-free) | Stage 1, `shuffle` vs `correct` | `results/stage1_accuracy.csv` |
 | the `<think>` format is neutral (p = 0.91) | Stage 1, `correct` vs `correct_notag` | `results/stage1_accuracy.csv` |
 | post-label placement does not replicate (0.324) | Stage 1, `correct_after` | `results/stage1_accuracy.csv` |
 | distill-SFT beats step-by-step on B under reasoning (p = 0.025) | `key_tests_independent.py` | `results/key_tests_independent.csv` |
 | α repairs the direct-answer deficit | Stage 2, α sweep | `results/paired_tests.csv` |
 | reasoning costs ~77× the latency | Stage 2 timing | `results/compute_efficiency.csv` |
 | rationale training preserves general reasoning | ENEM probe | `results/forgetting_enem.txt` |
+| coherent rationales move P(gold) in the teacher's answer direction | frozen-reader prefix scoring | `figures/probability_trajectories.csv`, `figures/probability_contrasts.csv` |
+| the probability interaction survives removal of overt lexical cues | lexical-overlap sensitivity | `results/label_leakage_effect_sensitivity.csv` |
+| generated-rationale utility is similar for distill-SFT and step-by-step | paired generated-rationale audit | `results/generated_rationale_utility.csv` |
 
 ---
 
@@ -178,8 +193,8 @@ a sample of it.
 
 | file | contents |
 |---|---|
-| `questions_2024_2025.jsonl` | `id`, `source`, `exam_year`, `stem`, `options`, `gold_answer`, `has_image` |
-| `teacher_rationales.jsonl` | `id`, `rationale`, `teacher_answer`, `teacher_answer_audit`, `parsers_disagree`, `teacher_correct`, `teacher_correct_audit`, `n_tokens` |
+| `questions_2024_2025.jsonl` | `id`, `question_cluster_id`, `source`, `exam_year`, `stem`, `options`, `gold_answer`, `has_image` |
+| `teacher_rationales.jsonl` | `id`, `question_cluster_id`, `rationale`, `teacher_answer`, `teacher_answer_audit`, `parsers_disagree`, `teacher_correct`, `teacher_correct_audit`, `n_tokens` |
 
 Sources: Enare Residência Médica (2,691), Enare Multiprofissional (1,164),
 INEP (287), FUVEST (118). 45 items reference an image; the images themselves are
@@ -191,7 +206,28 @@ are the expensive part to regenerate — reproducing them requires running a 32B
 model over the whole bank — so releasing them is what makes the distillation
 reproducible without that hardware.
 
+All 4,260 evaluations are retained. They comprise 3,792 normalised-stem clusters
+because 468 rows repeat one of 395 question stems. `id` is the unique item join
+key; `question_cluster_id` identifies repeated stems for clustered resampling.
+The release builder aborts unless the question/rationale join is one-to-one, and
+`data/mapping_audit.json` records the resulting integrity checks.
+
 See `data/README.md` for provenance, the exact join key, and licensing.
+
+Before publishing a release, regenerate the public join from the original
+teacher archive and run the release gate:
+
+```bash
+python code/data_prep/build_dataset.py \
+  --questions-jsonl data/questions_2024_2025.jsonl \
+  --teacher-file data/qwen32_qa_thinkings.pkl \
+  --out-dir data
+python tests/test_release_data.py
+```
+
+The builder stops instead of guessing if the archive cannot be matched
+one-to-one. This is intentional: a successful run certifies that all 4,260
+question IDs appear exactly once in each public file.
 
 ---
 
@@ -301,10 +337,9 @@ appears, please cite this archived release:
 @software{martinelli2026cotdistillation,
   title   = {Audit Before You Distill: code, data, and analysis for controlled
              reasoning transfer into compact health-professions language models},
-  author  = {Martinelli, Tiago and Pereira, Adriano Jos\'e and Papa, Jo\~ao Paulo},
+  author  = {Martinelli, Tiago and Papa, Jo\~ao Paulo and Pereira, Adriano Jos\'e},
   year    = {2026},
   url     = {https://github.com/martinellitiago/cot-distillation-health-qa},
-  doi     = {[Zenodo DOI]},
   version = {1.0.0}
 }
 ```

@@ -1,0 +1,7 @@
+contrast,teacher_status,estimate,ci_lo,ci_hi
+coherent_full_minus_baseline,correct,0.214,0.199,0.229
+coherent_full_minus_baseline,wrong,-0.137,-0.161,-0.115
+coherent_minus_shuffled_full,correct,0.221,0.206,0.236
+coherent_minus_shuffled_full,wrong,-0.138,-0.162,-0.116
+correctness_by_coherence_interaction,interaction,0.359,0.333,0.388
+
